@@ -14,11 +14,13 @@
 npx skills add j-token/omp-skill --skill omp
 ```
 
-전역에 설치하고 확인 질문을 생략합니다.
+Oh My Pi/Pi에 전역 설치합니다. PromptScript는 프로젝트 범위 설치만 지원하므로 `pi` 대상을 명시해야 합니다.
 
 ```sh
-npx skills add j-token/omp-skill --skill omp -g -y
+npx skills add j-token/omp-skill --skill omp --global --agent pi --yes
 ```
+
+다른 에이전트에 전역 설치하려면 `pi`를 `claude-code`, `codex` 같은 Skills CLI 식별자로 바꾸면 됩니다. PromptScript가 감지되는 환경에서 `--agent`를 생략하면 지원하지 않는 PromptScript 전역 설치까지 시도해 오류가 발생합니다.
 
 설치 전에 저장소에서 제공하는 스킬을 확인할 수 있습니다.
 

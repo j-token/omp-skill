@@ -14,11 +14,13 @@ Install it into the agents detected in the current project:
 npx skills add j-token/omp-skill --skill omp
 ```
 
-Install it globally without an interactive prompt:
+Install it globally for Oh My Pi/Pi. Target `pi` explicitly because PromptScript only supports project-scoped skill installation:
 
 ```sh
-npx skills add j-token/omp-skill --skill omp -g -y
+npx skills add j-token/omp-skill --skill omp --global --agent pi --yes
 ```
+
+If another agent needs the global installation, replace `pi` with its Skills CLI identifier, such as `claude-code` or `codex`. Do not omit `--agent` on a machine where PromptScript is detected; otherwise the CLI also attempts an unsupported global PromptScript installation.
 
 List the skill before installing:
 
