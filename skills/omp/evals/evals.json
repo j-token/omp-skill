@@ -1,0 +1,44 @@
+{
+  "skill_name": "omp",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "우리 팀은 Oh My Pi를 프로젝트 단위로 설정하려고 합니다. 기본 모델 역할과 reviewer 전용 slow 역할을 나누고, 동시에 실행되는 subagent는 최대 4개로 제한하며, shell/browser/computer 실행은 매번 승인을 받게 해 주세요. yolo는 쓰지 않습니다. 정확한 설정 파일 경로와 YAML 예시, 설정 우선순위, 적용 확인 명령을 제시해 주세요.",
+      "expected_output": "Project .omp/config.yml, modelRoles/task concurrency/approval settings, project precedence, reload or new-session guidance, and focused verification commands are accurate.",
+      "files": [],
+      "assertions": [
+        "Names the project config path .omp/config.yml and explains project scope/precedence.",
+        "Uses modelRoles and task.agentModelOverrides.reviewer for reviewer routing.",
+        "Sets task.maxConcurrency to 4.",
+        "Keeps a non-yolo approval mode and explicitly prompts bash, browser, and computer.",
+        "Provides commands or a new-session step that verify effective configuration."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Rust 서비스에서 OMP를 별도 프로세스로 띄워 NDJSON으로 프롬프트와 host tool을 주고받으려 합니다. 큰 응답도 처리해야 하고 에디터 통합은 아닙니다. SDK, RPC, ACP 중 무엇을 써야 하는지 결정하고, 실행 명령, 최초 handshake, protocol v2 협상, chunk reassembly 제한, 주요 lifecycle event와 종료 처리를 설명해 주세요.",
+      "expected_output": "Selects RPC rather than Bun SDK or editor ACP and accurately states stdio framing, ready/negotiate flow, 1 MiB/64 MiB limits, chunks, events, abort/process cleanup.",
+      "files": [],
+      "assertions": [
+        "Selects RPC and correctly distinguishes it from Bun SDK and editor ACP.",
+        "Uses omp --mode rpc with one-JSON-object-per-line stdio framing.",
+        "Handles the ready frame and negotiates protocolVersion 2 before v2 features.",
+        "States the 1 MiB frame and 64 MiB reassembled limits and rpc_chunk reassembly fields.",
+        "Covers lifecycle events, abort behavior, and child-process cleanup."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "`.omp/skills/db-review/SKILL.md`를 만들었는데 `/skill:db-review`로는 실행되고 일반 자연어 요청에서는 자동으로 로드되지 않습니다. OMP의 skill이 권한이나 도구를 추가하는지도 헷갈립니다. frontmatter, hide/disable-model-invocation, include/ignore 필터, disabledExtensions, discovery scope와 reload 시점을 순서대로 진단해 주세요.",
+      "expected_output": "Explains instruction-only boundary, required concrete description, explicit invocation versus automatic listing, filters/disable paths, /extensions source inspection, reload/new-session behavior.",
+      "files": [],
+      "assertions": [
+        "States that a skill supplies instructions and does not add tools or permissions.",
+        "Checks a concrete description and automatic invocation suppression by hide or disable-model-invocation.",
+        "Checks includeSkills, ignoredSkills, --skills/--no-skills, and disabledExtensions.",
+        "Uses /extensions to inspect scope, provider, source path, and status.",
+        "Explains reload/session-start behavior for discovery and automatic advertisement."
+      ]
+    }
+  ]
+}
