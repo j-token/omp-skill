@@ -1,0 +1,10 @@
+{
+  "name": "example-omp-plugin",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Minimal OMP plugin with an extension and bundled skill",
+  "omp": {
+    "extensions": ["./src/index.ts"]
+  }
+}

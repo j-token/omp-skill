@@ -1,0 +1,17 @@
+{
+  "name": "example-pi-package",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Minimal Pi package with an extension and bundled skill",
+  "keywords": ["pi-package"],
+  "pi": {
+    "extensions": ["./extensions"],
+    "skills": ["./skills"]
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-ai": "*",
+    "@earendil-works/pi-coding-agent": "*",
+    "typebox": "*"
+  }
+}

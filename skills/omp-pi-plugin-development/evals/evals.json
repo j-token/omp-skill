@@ -1,0 +1,57 @@
+{
+  "skill_name": "omp-pi-plugin-development",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "프로젝트 전용 OMP 플러그인을 만들어 주세요. `/notes` 명령, 모델이 호출하는 `search_notes` 도구, 그리고 노트 검색 요청에서 자동 로드되는 skill을 한 패키지에 넣어야 합니다. 읽기 도구는 top-level 필수 도구가 아니며 실행 승인도 요구하면 안 됩니다. 개발 중 직접 로드부터 plugin link/doctor까지 검증 순서를 포함해 주세요.",
+      "expected_output": "Creates an OMP-native plugin using @oh-my-pi imports, omp.extensions, bundled skills, truthful read approval and discoverable loading, then verifies direct behavior before managed linking and doctor checks.",
+      "files": [],
+      "assertions": [
+        "Identifies the target as OMP and uses @oh-my-pi/pi-coding-agent rather than a Pi Coding Agent namespace.",
+        "Declares the extension with package.json omp.extensions and places the bundled skill under skills/<name>/SKILL.md.",
+        "Registers search_notes with approval read and loadMode discoverable rather than exec or essential.",
+        "Keeps runtime actions out of factory load and gives the command/tool observable behavior.",
+        "Direct-loads and exercises the feature before omp plugin link, plugin list/doctor, and reload verification."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "최신 Pi Coding Agent용 패키지를 작성하려고 합니다. upper/lower 두 동작을 가진 `text_case` tool을 제공하고 npm/Git로 설치할 수 있게 해 주세요. Google 모델에서도 스키마가 동작해야 하며, 프로젝트 설치와 임시 실행 방법, TUI가 없는 print 모드에서의 동작도 설명해 주세요.",
+      "expected_output": "Creates a current Earendil Pi package with typebox and StringEnum, correct pi manifest/dependencies, direct and project-scoped package commands, and a headless-safe tool path.",
+      "files": [],
+      "assertions": [
+        "Uses @earendil-works/pi-coding-agent, @earendil-works/pi-ai, typebox, and StringEnum for the action enum.",
+        "Declares a Pi package with the pi manifest, pi-package keyword, and appropriate runtime peer dependencies.",
+        "Keeps the core tool independent of TUI and guards optional UI by ctx.hasUI or mode.",
+        "Provides pi -e direct loading and a project-scoped pi install -l workflow.",
+        "Distinguishes import/type success from invoking the actual text_case tool in interactive and print/headless paths."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "`@earendil-works/pi-coding-agent`를 import하고 `pi.extensions`를 쓰는 기존 extension이 Pi에서는 동작합니다. OMP에서도 로드되지만 `resources_discover`로 추가한 skill이 나타나지 않습니다. 하나의 코드로 지원할 수 있는지 조사하고 안전한 마이그레이션을 구현해 주세요.",
+      "expected_output": "Recognizes OMP's legacy loader compatibility but not full semantic parity, explains the OMP resources_discover limitation, and uses platform-specific resource packaging or thin adapters with verification in both runtimes.",
+      "files": [],
+      "assertions": [
+        "Explains that OMP accepts pi.extensions and rewrites legacy/current Pi imports but that this is loader-level compatibility only.",
+        "Identifies that OMP 18.0.6 documents resources_discover without an AgentSession emission callsite.",
+        "Moves OMP skills to plugin sibling discovery or an OMP-supported path instead of suppressing the symptom.",
+        "Uses separate thin entry points when registration or packaging diverges while sharing only pure domain logic.",
+        "Requires the same observable behavior to be exercised in OMP and Pi before claiming dual-runtime support."
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "Windows에서 `pi --version`은 0.7.1인데 extension 예제의 `pi -e`가 먹히지 않고 help에는 `prime-agent`라고 표시됩니다. 동시에 omp 18.0.6은 설치되어 있습니다. 왜 그런지 진단하고, 제가 가진 extension을 어느 런타임 대상으로 고칠지 결정하는 절차를 제시해 주세요.",
+      "expected_output": "Detects a pi executable collision rather than treating version output as Pi Coding Agent evidence, uses repository imports/manifests/paths to route the target, and avoids running Pi package commands against Prime Agent.",
+      "files": [],
+      "assertions": [
+        "Treats the prime-agent banner as evidence that the local pi executable is not Pi Coding Agent.",
+        "Does not recommend executing Pi Coding Agent install/config commands through that conflicting binary.",
+        "Uses imports, package manifests, dependencies, .omp/.pi paths, and requested distribution workflow to identify the target.",
+        "Chooses OMP when repository evidence is OMP-native, while clearly separating the option to install current Earendil Pi Coding Agent.",
+        "States exactly which runtime behavior can be verified locally and which remains unavailable."
+      ]
+    }
+  ]
+}
